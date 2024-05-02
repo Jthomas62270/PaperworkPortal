@@ -1,10 +1,10 @@
-FROM python:3.9-slim 
+FROM continuumio/anaconda3
 
 WORKDIR /src
 
 COPY . /app
 
-RUN pip install --no-cachew-dir -r -requirements.txt
+RUN conda install --file requirements.txt
 
 EXPOSE 80 
 
