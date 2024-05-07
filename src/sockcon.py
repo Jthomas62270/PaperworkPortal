@@ -1,17 +1,19 @@
 import socket 
 
-def socketTransmit(socketIP, socketPort): 
+def socketTransmit(socketIP, socketPort, command): 
     UDPsocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     
     try: 
-        message = "<U1> $ Chan 1 full full #".encode('utf-8')
+        message = command.encode('utf-8')
         UDPsocket.sendto(message, (socketIP, socketPort))
         print("Command sent...")
     except Exception as e: 
         print("Error: ", e)
+        return 1
     finally: 
         print("Socket closed...")
         UDPsocket.close()
+        return 0
 
 def socketRecieve(socketIP, socketPort): 
     UDPsocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)

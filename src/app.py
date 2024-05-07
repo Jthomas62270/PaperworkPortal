@@ -7,6 +7,7 @@ from db import db
 from datetime import datetime
 import pandas as pd
 import os 
+from guiWindow import portWindow
 
 CUES_PATH = "./FORMATTED_CUES/"
 
@@ -161,6 +162,9 @@ def deleteNotes(noteId, showName):
 
 if __name__ == '__main__': 
     watcher_thread = Thread(target=Watcher().run)
+    guiWindow_thread = Thread(target=portWindow().run())
     watcher_thread.start()
+    guiWindow_thread.start()
     api.run(debug=True)
     watcher_thread.join()
+    guiWindow_thread.join()
